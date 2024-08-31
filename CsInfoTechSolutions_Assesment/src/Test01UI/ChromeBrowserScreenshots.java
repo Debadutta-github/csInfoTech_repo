@@ -28,7 +28,7 @@ public class ChromeBrowserScreenshots {
             "https://www.getcalley.com/calley-pro-features/"
         };
 
-        String[] fileNames = {
+        String[] screenshots = {
             "FirstURLPage.png",
             "SecondURLPage.png",
             "ThirdURLPage.png",
@@ -43,10 +43,10 @@ public class ChromeBrowserScreenshots {
             driver.findElement(By.linkText(urls[i])).click();
 
             TakesScreenshot screenshot = (TakesScreenshot) driver;
-            File srcFile = screenshot.getScreenshotAs(OutputType.FILE);
-            String timestamp = LocalDateTime.now().toString().replace(":", "-");
-            File destFile = new File("./ChromeScreenShot/" +deviceName+"_"+resolution+"_"+timestamp+"_" + fileNames[i]);
-            FileHandler.copy(srcFile, destFile);
+            File temp = screenshot.getScreenshotAs(OutputType.FILE);
+            String timeStamp = LocalDateTime.now().toString().replace(":", "-");
+            File dest = new File("./ChromeScreenShot/" +deviceName+"_"+resolution+"_"+timeStamp+"_" + screenshots[i]);
+            FileHandler.copy(temp, dest);
 
             Thread.sleep(2000);
             driver.navigate().back();

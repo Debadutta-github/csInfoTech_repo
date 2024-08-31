@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.io.FileHandler;
 
-public class FireFoxURL {
+public class FireFoxBrowserScreenshot {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
@@ -28,14 +28,14 @@ public class FireFoxURL {
             "https://www.getcalley.com/calley-pro-features/"
         };
 
-        String[] fileNames = {
+        String[] files = {
             "FirstURLPage.png",
             "SecondURLPage.png",
             "ThirdURLPage.png",
             "FourthURLPage.png",
             "FifthURLPage.png"
         };
-       String deviceName="ASUS";
+       String deviceName="HP";
        String resolution="1920X1080";
 
         for (int i = 0; i < urls.length; i++) {
@@ -43,10 +43,10 @@ public class FireFoxURL {
             driver.findElement(By.linkText(urls[i])).click();
 
             TakesScreenshot screenshot = (TakesScreenshot) driver;
-            File firefoxFile = screenshot.getScreenshotAs(OutputType.FILE);
-            String timestamp = LocalDateTime.now().toString().replace(":", "-");
-            File destFile = new File("./AllFireFoxURL/" +deviceName+"_"+resolution+"_"+timestamp+"_"+ fileNames[i]);
-            FileHandler.copy(firefoxFile, destFile);
+            File temp = screenshot.getScreenshotAs(OutputType.FILE);
+            String timeStamp = LocalDateTime.now().toString().replace(":", "-");
+            File dest = new File("./AllFireFoxURL/" +deviceName+"_"+resolution+"_"+timeStamp+"_"+ files[i]);
+            FileHandler.copy(temp, dest);
 
             Thread.sleep(2000);
             driver.navigate().back();
